@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: skillnex-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: USE_DEMO_DATA
+        value: "false"
+      - key: GOOGLE_SHEETS_API_URL
+        value: https://script.google.com/macros/s/AKfycbz-2Sf-yw2Y-Iq9ulp4UfktQf1gJHnnYq0U0ANl9hTGkh8ESaJPJ6IJaH9POT1L7Z8u/exec
+      - key: OLLAMA_HOST
+        value: http://localhost:11434
+      - key: OLLAMA_MODEL
+        value: llama3
