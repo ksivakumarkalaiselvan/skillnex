@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Container -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar Header -->
+            <div id="topbar-container"></div>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+
+                <!-- 1. Student Name Banner -->
+                <div class="glass-card" style="padding: 28px; margin-bottom: 28px; border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <span class="badge badge-indigo" style="margin-bottom: 8px;">Student Workspace</span>
+                            <h1 style="font-size: 2rem; margin: 0;" id="dash-student-name">Welcome, Student</h1>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 4px;" id="dash-student-dept">Computer Science • 3rd Year</p>
+                        </div>
+                        <div class="avatar" id="dash-avatar" style="width: 54px; height: 54px; font-size: 1.5rem;">S</div>
+                    </div>
+                </div>
+
+                <!-- 2. Minimalist Stat Grid: Overall Score, Active Courses, Best Subject -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 28px;">
+                    
+                    <!-- Overall Skill Score Card -->
+                    <div class="glass-card" style="padding: 24px;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">
+                            Overall Skill Score
+                        </div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: #a5b4fc;" id="dash-overall-score">
+                            0%
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 4px;" id="dash-score-basis">
+                            Calculated from completed assessments
+                        </div>
+                    </div>
+
+                    <!-- Active Courses Card -->
+                    <div class="glass-card" style="padding: 24px;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">
+                            Active Courses
+                        </div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: #34d399;" id="dash-active-count">
+                            0
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="dash-active-list">
+                            No active study plans
+                        </div>
+                    </div>
+
+                    <!-- Best Performing Subject Card (Highlighted) -->
+                    <div class="glass-card" style="padding: 24px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.15) 100%); border-color: var(--primary-glow);" id="dash-best-card">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #a5b4fc; text-transform: uppercase;">⭐ Best Performing Subject</span>
+                            <span class="badge badge-emerald" id="dash-best-badge">Top Subject</span>
+                        </div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;" id="dash-best-subject">
+                            None Assessed
+                        </div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: #34d399;" id="dash-best-score">
+                            --
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Subject-Specific Performance List -->
+                <div class="glass-card" style="padding: 28px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                        <h3 style="font-size: 1.2rem;">Completed Subject Assessment Scores</h3>
+                        <span class="badge badge-indigo">Data-Driven</span>
+                    </div>
+
+                    <div id="dash-subject-scores-container">
+                        <div style="text-align: center; padding: 24px; color: var(--text-muted);">
+                            No subject assessments completed yet. Take an assessment to see your scores.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Dashboard.initStudent();
+        });
+    </script>
+</body>
+</html>

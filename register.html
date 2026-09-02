@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 0; background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, var(--bg-primary) 70%);">
+
+    <div class="glass-card" style="width: 100%; max-width: 520px; padding: 40px; border-color: var(--glass-border-glow);">
+        <div style="text-align: center; margin-bottom: 28px;">
+            <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 12px;">
+                <span>SKILL<span class="logo-badge">NEX</span></span>
+            </a>
+            <h2 style="font-size: 1.5rem;">Create Your Account</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Join your city's smart education battle team</p>
+        </div>
+
+        <form id="register-form">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="reg-name" class="form-input" placeholder="Arun Kumar" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="reg-email" class="form-input" placeholder="student@skillnex.edu" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <select id="reg-role" class="form-select">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">City Team</label>
+                    <select id="reg-city" class="form-select">
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Salem">Salem</option>
+                        <option value="Trichy">Trichy</option>
+                        <option value="Erode">Erode</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label class="form-label">Department</label>
+                    <input type="text" id="reg-dept" class="form-input" placeholder="Computer Science" value="Computer Science">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Year of Study</label>
+                    <select id="reg-year" class="form-select">
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year" selected>3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" id="reg-btn" class="btn btn-primary" style="width: 100%; margin-top: 12px;">
+                Create Account & Join City Battle →
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">
+            Already registered? <a href="login.html" style="font-weight: 700;">Sign In</a>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('reg-btn');
+            btn.innerText = 'Creating Account...';
+            btn.disabled = true;
+
+            const userData = {
+                name: document.getElementById('reg-name').value,
+                email: document.getElementById('reg-email').value,
+                password: document.getElementById('reg-password').value,
+                role: document.getElementById('reg-role').value,
+                city: document.getElementById('reg-city').value,
+                department: document.getElementById('reg-dept').value,
+                year: document.getElementById('reg-year').value
+            };
+
+            try {
+                const res = await API.register(userData);
+                Components.showToast('Account registered successfully!', 'success');
+                setTimeout(() => window.location.href = 'login.html', 1000);
+            } catch (err) {
+                btn.innerText = 'Create Account & Join City Battle →';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

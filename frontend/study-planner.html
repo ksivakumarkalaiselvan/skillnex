@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Study Planner — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Container -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar Header -->
+            <div id="topbar-container"></div>
+
+            <div style="max-width: 850px; margin: 0 auto;">
+                
+                <!-- Single Subject Selection Card -->
+                <div class="glass-card" style="padding: 32px; margin-bottom: 28px; border-color: var(--primary-glow);">
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <span class="badge badge-purple" style="margin-bottom: 12px; font-size: 0.85rem; padding: 6px 16px;">Student-Driven Learning</span>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Which subject do you find difficult to study?</h2>
+                        <p style="font-size: 1rem; color: var(--text-muted);">Select or enter the single subject you need help with. We will generate a plan and assessment ONLY for this subject.</p>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; max-width: 600px; margin: 0 auto;">
+                        <select id="difficult-subject-select" class="form-select" style="flex: 1; font-size: 1rem; padding: 14px 18px;">
+                            <option value="Mathematics" selected>Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Programming">Programming (C/C++/Python/JS)</option>
+                            <option value="English">English</option>
+                            <option value="Electronics">Electronics</option>
+                        </select>
+                        <button id="generate-plan-btn" class="btn btn-primary btn-lg" onclick="Planner.generateSubjectPlan()">
+                            Generate Plan →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Generated Subject Plan Output Container -->
+                <div id="subject-plan-container">
+                    <div class="glass-card" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        Select a difficult subject above and click <strong>Generate Plan →</strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/planner.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Planner.init();
+        });
+    </script>
+</body>
+</html>

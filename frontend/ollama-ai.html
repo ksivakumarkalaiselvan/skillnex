@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollama AI Workspace — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Container -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar Header -->
+            <div id="topbar-container"></div>
+
+            <!-- Ollama Control Header Bar -->
+            <div class="glass-card" style="padding: 16px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.4rem;">🦙</span>
+                    <div>
+                        <div style="font-weight: 700; font-size: 1rem;">Ollama Local AI Engine</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Private & offline LLMs running locally at http://localhost:11434</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <span id="ollama-status-badge" class="badge badge-amber">Checking Ollama Status...</span>
+                    
+                    <select id="ollama-model-select" class="form-select" style="padding: 6px 12px; font-size: 0.85rem; width: auto;">
+                        <option value="llama3">llama3 (Default)</option>
+                        <option value="mistral">mistral</option>
+                        <option value="gemma">gemma</option>
+                        <option value="codellama">codellama</option>
+                    </select>
+
+                    <button onclick="OllamaUI.checkStatus()" class="btn btn-outline btn-sm" title="Refresh Connection">
+                        🔄 Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Full-Width Clean Q&A Chat Container -->
+            <div class="chat-container" style="height: calc(100vh - 220px); max-width: 950px; margin: 0 auto;">
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Clean Initial Empty State -->
+                    <div id="ollama-empty-state" style="text-align: center; margin: auto; padding: 40px; color: var(--text-muted);">
+                        <div style="font-size: 3.5rem; margin-bottom: 12px;">🦙</div>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 8px; color: var(--text-main);">OLLAMA LOCAL AI</h2>
+                        <p style="font-size: 1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
+                            Enter any prompt or coding question. Your requests will be processed locally by your Ollama instance.
+                        </p>
+                        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary-glow); padding: 12px; border-radius: var(--radius-sm); display: inline-block; font-size: 0.85rem; text-align: left;">
+                            <strong>Quick Terminal Commands to start Ollama:</strong><br>
+                            <code>ollama serve</code> — Starts local server<br>
+                            <code>ollama run llama3</code> — Downloads & runs Llama 3 model
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Bar -->
+                <div style="padding: 16px 24px; background: var(--bg-secondary); border-top: 1px solid var(--glass-border); display: flex; gap: 12px;">
+                    <input type="text" id="ollama-input" class="form-input" placeholder="Ask Ollama any question or request code..." style="flex: 1;">
+                    <button id="ollama-send-btn" class="btn btn-primary" style="padding: 12px 28px;">Send to Ollama →</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/ollama.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            OllamaUI.init();
+        });
+    </script>
+</body>
+</html>

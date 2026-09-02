@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, var(--bg-primary) 70%);">
+
+    <div class="glass-card" style="width: 100%; max-width: 440px; padding: 40px; border-color: var(--glass-border-glow);">
+        <div style="text-align: center; margin-bottom: 28px;">
+            <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 12px;">
+                <span>SKILL<span class="logo-badge">NEX</span></span>
+            </a>
+            <h2 style="font-size: 1.5rem;">Welcome Back</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Sign in to continue your city battle journey</p>
+        </div>
+
+        <!-- Pre-populated Quick Hackathon Demo Buttons -->
+        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary-glow); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 24px; text-align: center;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #a5b4fc; margin-bottom: 8px;">⚡ 1-CLICK DEMO LOGIN</div>
+            <div style="display: flex; gap: 8px; justify-content: center;">
+                <button class="btn btn-primary btn-sm" onclick="quickLogin('student')">👨‍🎓 Student</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickLogin('teacher')">👨‍🏫 Teacher</button>
+                <button class="btn btn-outline btn-sm" onclick="quickLogin('admin')">🏛️ Admin</button>
+            </div>
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="login-email" class="form-input" placeholder="arun@skillnex.edu" value="arun@skillnex.edu" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" value="password123" required>
+            </div>
+
+            <button type="submit" id="login-btn" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+                Sign In →
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">
+            Don't have an account? <a href="register.html" style="font-weight: 700;">Create Account</a>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        function quickLogin(role) {
+            if (role === 'student') {
+                document.getElementById('login-email').value = 'arun@skillnex.edu';
+            } else if (role === 'teacher') {
+                document.getElementById('login-email').value = 'teacher@skillnex.edu';
+            } else if (role === 'admin') {
+                document.getElementById('login-email').value = 'admin@skillnex.edu';
+            }
+            document.getElementById('login-password').value = 'password123';
+            document.getElementById('login-form').dispatchEvent(new Event('submit'));
+        }
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+
+            btn.innerText = 'Signing In...';
+            btn.disabled = true;
+
+            try {
+                const res = await API.login({ email, password });
+                if (res.data) {
+                    Auth.setUser(res.data);
+                    Components.showToast('Login successful!', 'success');
+                    setTimeout(() => {
+                        if (res.data.role === 'student') window.location.href = 'student-dashboard.html';
+                        else if (res.data.role === 'teacher') window.location.href = 'teacher-dashboard.html';
+                        else window.location.href = 'admin-dashboard.html';
+                    }, 500);
+                }
+            } catch (err) {
+                btn.innerText = 'Sign In →';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

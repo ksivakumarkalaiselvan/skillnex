@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Assessment — SKILLNEX AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Container -->
+        <div id="sidebar-container"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Topbar Header -->
+            <div id="topbar-container"></div>
+
+            <div class="glass-card" style="max-width: 850px; margin: 0 auto; padding: 32px;">
+                
+                <!-- Subject Selector Header Bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border);">
+                    <div>
+                        <span class="badge badge-purple" id="assessment-subject-badge">Mathematics Assessment</span>
+                        <h2 style="font-size: 1.4rem; margin-top: 4px;" id="assessment-title">Subject Assessment Engine</h2>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Change Subject:</span>
+                        <select id="assessment-subject-select" class="form-select" style="padding: 6px 12px; font-size: 0.85rem; width: auto;" onchange="Assessment.switchSubject(this.value)">
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Programming">Programming</option>
+                            <option value="English">English</option>
+                            <option value="Electronics">Electronics</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Active Quiz Screen -->
+                <div id="quiz-active-area">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <span class="badge badge-indigo" id="q-num">Question 1 of 5</span>
+                        <span class="badge badge-amber" id="q-topic">Topic: Algebra</span>
+                    </div>
+
+                    <h2 id="q-text" style="font-size: 1.3rem; margin-bottom: 24px; line-height: 1.5;">
+                        Loading question...
+                    </h2>
+
+                    <div id="q-options" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                        <!-- Options rendered dynamically -->
+                    </div>
+
+                    <div id="q-feedback" style="display: none; padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 700;"></div>
+                </div>
+
+                <!-- Results Screen -->
+                <div id="quiz-results-area" style="display: none; text-align: center; padding: 20px 0;">
+                    <span class="badge badge-emerald" style="font-size: 1rem; padding: 8px 20px; margin-bottom: 16px;">🎉 Assessment Completed!</span>
+                    <h1 style="font-size: 3.5rem; margin-bottom: 4px;" id="res-score-count">4 / 5</h1>
+                    <p style="font-size: 1.3rem; color: var(--text-muted); margin-bottom: 20px;">
+                        Skill Score: <strong id="res-pct-val" style="color: #a5b4fc; font-size: 1.6rem;">80%</strong>
+                    </p>
+
+                    <div style="background: rgba(99, 102, 241, 0.12); border: 1px solid var(--primary-glow); padding: 20px; border-radius: var(--radius-md); max-width: 500px; margin: 0 auto 28px;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">CALCULATED SKILL LEVEL</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #34d399; margin-bottom: 8px;" id="res-skill-level">Good</div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted);" id="res-subject-name">Subject: Mathematics</div>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; gap: 16px;">
+                        <button onclick="Assessment.resetQuiz()" class="btn btn-outline">Retake Assessment 🔄</button>
+                        <a href="skills.html" class="btn btn-primary">View Skills Intelligence →</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/assessment.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Assessment.init();
+        });
+    </script>
+</body>
+</html>
