@@ -1,5 +1,6 @@
 const OllamaUI = {
     selectedModel: 'llama3',
+    isLocalDirect: false,
 
     async init() {
         const user = Auth.requireAuth();
@@ -33,37 +34,55 @@ const OllamaUI = {
     },
 
     async checkStatus() {
+        // 1. Attempt direct client-side fetch from browser to local Ollama (http://localhost:11434)
+        try {
+            const localRes = await fetch('http://localhost:11434/api/tags', { method: 'GET' });
+            if (localRes.ok) {
+                const data = await localRes.json();
+                this.isLocalDirect = true;
+                this.updateStatusUI(true, 'http://localhost:11434 (Direct Local)', data.models || []);
+                return;
+            }
+        } catch (localErr) {
+            console.log("Direct local fetch failed/blocked by CORS, trying backend API proxy...");
+        }
+
+        // 2. Fallback to Backend Proxy API
+        try {
+            const res = await API.getOllamaStatus();
+            if (res && res.data && res.data.online) {
+                this.isLocalDirect = false;
+                this.updateStatusUI(true, res.data.host, res.data.models || []);
+            } else {
+                this.updateStatusUI(false);
+            }
+        } catch (e) {
+            this.updateStatusUI(false);
+        }
+    },
+
+    updateStatusUI(online, host = 'http://localhost:11434', models = []) {
         const badgeEl = document.getElementById('ollama-status-badge');
         const selectEl = document.getElementById('ollama-model-select');
 
-        try {
-            const res = await API.getOllamaStatus();
-            const data = res.data;
-
-            if (data.online) {
-                if (badgeEl) {
-                    badgeEl.className = 'badge badge-emerald';
-                    badgeEl.innerHTML = `● Ollama Active (${data.host})`;
-                }
-
-                if (selectEl && data.models && data.models.length > 0) {
-                    selectEl.innerHTML = data.models.map(m => `
-                        <option value="${m.name}" ${m.name.includes('llama3') ? 'selected' : ''}>
-                            ${m.name} (${(m.size / (1024 * 1024 * 1024)).toFixed(1)} GB)
-                        </option>
-                    `).join('');
-                    this.selectedModel = selectEl.value;
-                }
-            } else {
-                if (badgeEl) {
-                    badgeEl.className = 'badge badge-amber';
-                    badgeEl.innerHTML = `⚠️ Ollama Offline`;
-                }
-            }
-        } catch (e) {
+        if (online) {
             if (badgeEl) {
-                badgeEl.className = 'badge badge-rose';
-                badgeEl.innerHTML = `✕ Ollama Offline`;
+                badgeEl.className = 'badge badge-emerald';
+                badgeEl.innerHTML = `● Ollama Active (${host})`;
+            }
+
+            if (selectEl && models.length > 0) {
+                selectEl.innerHTML = models.map(m => `
+                    <option value="${m.name}" ${m.name.includes('qwen') || m.name.includes('llama3') ? 'selected' : ''}>
+                        ${m.name} (${(m.size / (1024 * 1024 * 1024)).toFixed(1)} GB)
+                    </option>
+                `).join('');
+                this.selectedModel = selectEl.value;
+            }
+        } else {
+            if (badgeEl) {
+                badgeEl.className = 'badge badge-amber';
+                badgeEl.innerHTML = `⚠️ Ollama Offline`;
             }
         }
     },
@@ -82,6 +101,33 @@ const OllamaUI = {
 
         this.showThinkingIndicator();
 
+        // Method A: Direct Client-Side Browser Request to Local Ollama
+        if (this.isLocalDirect) {
+            try {
+                const localResponse = await fetch('http://localhost:11434/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: this.selectedModel,
+                        prompt: text,
+                        stream: false
+                    })
+                });
+
+                if (localResponse.ok) {
+                    const data = await localResponse.json();
+                    this.hideThinkingIndicator();
+                    if (data && data.response) {
+                        this.appendMessage('ai', data.response, this.selectedModel);
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.warn("Direct local query failed, falling back to backend API...", err);
+            }
+        }
+
+        // Method B: Fallback Proxy via Backend Server
         try {
             const res = await API.askOllama(text, this.selectedModel);
             this.hideThinkingIndicator();
@@ -93,7 +139,7 @@ const OllamaUI = {
             }
         } catch (e) {
             this.hideThinkingIndicator();
-            this.appendMessage('ai', `⚠️ Connection error: Could not reach Ollama server at http://localhost:11434.\n\nMake sure Ollama is installed and running:\n1. Open terminal and run: ollama serve\n2. Run your model: ollama run llama3`);
+            this.appendMessage('ai', `⚠️ **Ollama Connection Troubleshooting Guide**:\n\nWhen hosted on Vercel/Render, your local Ollama must allow web origin connections.\n\n**Quick Fix for Windows**:\n1. Close Ollama from system tray (bottom-right toolbar).\n2. Open Command Prompt / PowerShell and run:\n   \`setx OLLAMA_ORIGINS "*"\`\n3. Start Ollama again:\n   \`ollama serve\`\n4. Click **🔄 Refresh** above!`);
         }
     },
 
