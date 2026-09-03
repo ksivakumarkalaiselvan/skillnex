@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account — SKILLNEX AI</title>
+    <!-- PWA Meta Tags & Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SKILLNEX">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/icons/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/landing.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pwa.css">
 </head>
 <body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 0; background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, var(--bg-primary) 70%);">
 
@@ -101,5 +112,6 @@
             }
         });
     </script>
+    <script src="js/pwa-installer.js"></script>
 </body>
 </html>

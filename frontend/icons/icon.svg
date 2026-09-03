@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#4f46e5" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Background Card -->
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="url(#bgGrad)" filter="url(#shadow)" />
+  
+  <!-- Glowing Core -->
+  <circle cx="256" cy="256" r="160" fill="url(#glow)" />
+  
+  <!-- Outer Orbit Ring -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="6" stroke-dasharray="16 12" />
+  
+  <!-- Inner Orbit Ring -->
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#38bdf8" stroke-width="8" />
+  
+  <!-- Central Diamond Core -->
+  <polygon points="256,186 326,256 256,326 186,256" fill="#ffffff" />
+  <polygon points="256,216 296,256 256,296 216,256" fill="#6366f1" />
+  
+  <!-- Orbital Nodes -->
+  <circle cx="256" cy="116" r="14" fill="#38bdf8" />
+  <circle cx="396" cy="256" r="14" fill="#a855f7" />
+  <circle cx="256" cy="396" r="14" fill="#34d399" />
+  <circle cx="116" cy="256" r="14" fill="#fbbf24" />
+</svg>

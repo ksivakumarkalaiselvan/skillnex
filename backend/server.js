@@ -13,6 +13,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// PWA Service Worker & Manifest headers
+app.get('/sw.js', (req, res) => {
+  res.setHeader('Service-Worker-Allowed', '/');
+  res.setHeader('Content-Type', 'application/javascript');
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.sendFile(path.join(__dirname, '../frontend/sw.js'));
+});
+
+app.get('/manifest.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/manifest+json');
+  res.sendFile(path.join(__dirname, '../frontend/manifest.json'));
+});
+
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '../frontend')));
 

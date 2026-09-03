@@ -1,0 +1,361 @@
+/* ==========================================================================
+   SKILLNEX PWA & Notification Download Styles
+   ========================================================================== */
+
+/* Toast Container */
+.pwa-toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.pwa-toast {
+    pointer-events: auto;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pwa-toast-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 0.85));
+    border-color: rgba(52, 211, 153, 0.4);
+}
+
+.pwa-toast-info {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(79, 70, 229, 0.85));
+    border-color: rgba(165, 180, 252, 0.4);
+}
+
+.pwa-toast-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 0.85));
+    border-color: rgba(253, 230, 138, 0.4);
+}
+
+/* Floating Bottom-Right Download Badge */
+.pwa-floating-badge {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9000;
+    border-radius: 50px;
+    padding: 4px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.35);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pwa-floating-badge:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 14px 40px rgba(99, 102, 241, 0.55);
+    border-color: rgba(56, 189, 248, 0.8);
+}
+
+.pwa-floating-btn {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 40px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    outline: none;
+}
+
+.pwa-badge-icon {
+    font-size: 1.1rem;
+}
+
+.pwa-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #34d399;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    box-shadow: 0 0 10px #34d399;
+    animation: pwa-pulse 1.8s infinite;
+}
+
+@keyframes pwa-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+    }
+    70% {
+        transform: scale(1.3);
+        box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+    }
+}
+
+/* Top/Bottom Notification Install Banner */
+.pwa-install-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 680px;
+    z-index: 9500;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 20px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.25);
+}
+
+.pwa-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pwa-banner-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.pwa-banner-info p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #94a3b8;
+    line-height: 1.35;
+}
+
+.pwa-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.pwa-close-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.pwa-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Overlay & Modal Cards */
+.pwa-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pwa-modal-card {
+    background: rgba(15, 23, 42, 0.94);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    padding: 28px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.3);
+    animation: pwa-zoom-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pwa-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.pwa-modal-badge {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.pwa-modal-body {
+    text-align: center;
+}
+
+.pwa-modal-icon-glow {
+    margin: 0 auto 20px auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.5);
+}
+
+.pwa-modal-body h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.pwa-modal-body p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Install Steps Checklist */
+.pwa-install-steps {
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pwa-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #e2e8f0;
+}
+
+.step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #38bdf8);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pwa-nav-btn.highlight-pulse {
+    animation: nav-pulse 2s infinite;
+}
+
+@keyframes nav-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(99, 102, 241, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    }
+}
+
+@keyframes pwa-zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-slide-up {
+    animation: pwa-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pwa-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-out {
+    animation: pwa-fade-out 0.35s ease forwards;
+}
+
+@keyframes pwa-fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+/* Responsive adjust */
+@media (max-width: 640px) {
+    .pwa-install-banner {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 16px;
+    }
+    
+    .pwa-banner-content {
+        flex-direction: column;
+    }
+
+    .pwa-banner-actions {
+        justify-content: center;
+    }
+
+    .pwa-floating-badge {
+        bottom: 16px;
+        right: 16px;
+    }
+}

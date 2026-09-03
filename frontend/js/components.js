@@ -112,7 +112,10 @@ const Components = {
                         </li>
                     `).join('')}
                 </ul>
-                <div class="sidebar-footer">
+                <div class="sidebar-footer" style="display: flex; flex-direction: column; gap: 8px;">
+                    <button onclick="window.SKILLNEX_PWA ? window.SKILLNEX_PWA.downloadPWAThroughNotification() : null" class="btn btn-primary btn-sm" style="width: 100%;">
+                        📲 Download PWA App
+                    </button>
                     <button onclick="Auth.logout()" class="btn btn-outline btn-sm" style="width: 100%;">
                         🚪 Logout
                     </button>
@@ -133,7 +136,10 @@ const Components = {
                     <h1>${title || `Good Evening, ${user.name} 👋`}</h1>
                     <p>${subtitle || 'Keep learning and growing smarter.'}</p>
                 </div>
-                <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button onclick="window.SKILLNEX_PWA ? window.SKILLNEX_PWA.downloadPWAThroughNotification() : null" class="btn btn-outline btn-sm pwa-nav-btn" id="pwa-nav-install-btn" title="Download & Install SKILLNEX PWA App via Notification">
+                        <span>📲</span> Install App
+                    </button>
                     <button onclick="Components.toggleTheme()" class="btn btn-outline btn-sm" title="Toggle Dark/Light Mode">
                         🌙 Mode
                     </button>

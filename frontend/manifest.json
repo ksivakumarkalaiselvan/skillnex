@@ -1,0 +1,63 @@
+{
+  "name": "SKILLNEX — AI-Powered Smart Education Platform",
+  "short_name": "SKILLNEX",
+  "description": "Personalized AI learning, adaptive assessments, smart classroom intelligence, and skill gap detection.",
+  "id": "com.skillnex.pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Student Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your XP, study streaks, and active assessments",
+      "url": "/student-dashboard.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI Study Planner",
+      "short_name": "Planner",
+      "description": "Access your 5-day personalized AI study plan",
+      "url": "/study-planner.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Adaptive Assessments",
+      "short_name": "Assessments",
+      "description": "Take adaptive skill quizzes and practice tests",
+      "url": "/assessments.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
